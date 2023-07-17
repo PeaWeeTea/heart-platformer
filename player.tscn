@@ -1,39 +1,39 @@
-[gd_scene load_steps=14 format=3 uid="uid://dx2o3h3cmbrxs"]
+[gd_scene load_steps=15 format=3 uid="uid://dx2o3h3cmbrxs"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_utewi"]
-[ext_resource type="Texture2D" uid="uid://t8aaw75sxm7" path="res://player.png" id="2_ic6l3"]
 [ext_resource type="Resource" uid="uid://b0a1fgqmvkiws" path="res://DefaultMovementData.tres" id="2_q8ufq"]
+[ext_resource type="Texture2D" uid="uid://t8aaw75sxm7" path="res://Art/player.png" id="3_fveh7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_635us"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(0, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wwu5"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(144, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8qnc"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(24, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30nll"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(48, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u7avx"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(72, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibisi"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(96, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vt73t"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(120, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0gn5v"]
-atlas = ExtResource("2_ic6l3")
+atlas = ExtResource("3_fveh7")
 region = Rect2(0, 0, 24, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d70qy"]
@@ -81,7 +81,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_er2s7"]
 size = Vector2(8, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2h622"]
+size = Vector2(6, 12)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 floor_constant_speed = true
 floor_snap_length = 3.0
 script = ExtResource("1_utewi")
@@ -103,3 +107,16 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -32)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="HazardDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardDetector"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_2h622")
+
+[connection signal="area_entered" from="HazardDetector" to="." method="_on_hazard_detector_area_entered"]
