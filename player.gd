@@ -11,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var starting_position = global_position
 
 func _physics_process(delta):
-	var input_axis = Input.get_axis("ui_left", "ui_right")
+	var input_axis = Input.get_axis("move_left", "move_right")
 	apply_gravity(delta)
 	handle_wall_jump()
 	handle_jump()
@@ -26,9 +26,7 @@ func _physics_process(delta):
 	if just_left_ledge:
 		coyote_jump_timer.start()
 	just_wall_jumped = false
-#	print("Input axis: ", input_axis)
-#	print("On floor: ", is_on_floor())
-#	print(Input.is_action_pressed("ui_left"), ": Left / ", Input.is_action_pressed("ui_right"), ": Right")
+
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -37,23 +35,22 @@ func apply_gravity(delta):
 func handle_wall_jump():
 	if not is_on_wall_only(): return
 	var wall_normal = get_wall_normal()
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("jump"):
 		velocity.x = wall_normal.x * movement_data.speed
 		velocity.y = movement_data.jump_velocity
 		just_wall_jumped = true
-
 
 func handle_jump():
 	if is_on_floor(): air_jump = true
 	
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("jump"):
 			velocity.y = movement_data.jump_velocity
 	elif not is_on_floor():
-		if Input.is_action_just_released("ui_up") and velocity.y < movement_data.jump_velocity / 2:
+		if Input.is_action_just_released("jump") and velocity.y < movement_data.jump_velocity / 2:
 			velocity.y = movement_data.jump_velocity / 2
 		
-		if Input.is_action_just_pressed("ui_up") and air_jump and not just_wall_jumped:
+		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
 			velocity.y = movement_data.jump_velocity * 0.8
 			air_jump = false
 
@@ -85,6 +82,5 @@ func update_animations(input_axis):
 	if not is_on_floor():
 		animated_sprite_2d.play("jump")
 
-
-func _on_hazard_detector_area_entered(area):
+func _on_hazard_detector_area_entered(_area):
 	global_position = starting_position
