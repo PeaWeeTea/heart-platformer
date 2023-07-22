@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt0aedpf6tsv3"]
+[gd_scene load_steps=3 format=3 uid="uid://dt0aedpf6tsv3"]
 
 [ext_resource type="Script" path="res://victory_screen.gd" id="1_wow0e"]
+[ext_resource type="AudioStream" uid="uid://dlrop450oc027" path="res://Sound/buttonpress.wav" id="2_inv4i"]
 
 [node name="VictoryScreen" type="CenterContainer"]
 anchors_preset = 15
@@ -22,5 +23,10 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(104, 16)
 layout_mode = 2
 text = "Return to Main Menu"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_inv4i")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

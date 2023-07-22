@@ -1,9 +1,51 @@
-[gd_scene load_steps=8 format=3 uid="uid://clj4wpl8ln77q"]
+[gd_scene load_steps=11 format=3 uid="uid://clj4wpl8ln77q"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_qx5ag"]
 [ext_resource type="PackedScene" uid="uid://dx2o3h3cmbrxs" path="res://player.tscn" id="2_r6wyf"]
 [ext_resource type="PackedScene" uid="uid://cupn3d1q2nb83" path="res://level_completed.tscn" id="5_cm0bu"]
+[ext_resource type="AudioStream" uid="uid://dvc3rxtd0yfm6" path="res://Sound/countdown.wav" id="5_vtd57"]
 [ext_resource type="PackedScene" uid="uid://otqibvyokjar" path="res://level_tile_map.tscn" id="6_6o4kd"]
+[ext_resource type="AudioStream" uid="uid://o5tft8f1mswu" path="res://Sound/startsound.wav" id="6_vl171"]
+[ext_resource type="AudioStream" uid="uid://67wrdfxk3j1w" path="res://Sound/levelcomplete.wav" id="7_nyay2"]
+
+[sub_resource type="Animation" id="Animation_3mlfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/StartIn/StartInLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Start in: 3"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StartGamePlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_jj5gb"]
 resource_name = "countdown"
@@ -20,20 +62,51 @@ tracks/0/keys = {
 "update": 1,
 "values": ["Start in: 3", "Start in: 2", "Start in: 1"]
 }
-
-[sub_resource type="Animation" id="Animation_3mlfn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/StartIn/StartInLabel:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CountdownPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StartGamePlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StartGamePlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Start in: 3"]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1wyk3"]
@@ -98,6 +171,21 @@ process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_1wyk3")
 }
+
+[node name="CountdownPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vtd57")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="StartGamePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vl171")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="LevelCompletedPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_nyay2")
+bus = &"SFX"
 
 [connection signal="next_level" from="CanvasLayer/LevelCompleted" to="." method="_on_level_completed_next_level"]
 [connection signal="retry" from="CanvasLayer/LevelCompleted" to="." method="_on_level_completed_retry"]

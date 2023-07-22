@@ -10,6 +10,7 @@ var start_level_msec = 0.0
 @onready var start_in_label = %StartInLabel
 @onready var animation_player = $AnimationPlayer
 @onready var level_time_label = %LevelTimeLabel
+@onready var level_completed_player = $LevelCompletedPlayer
 
 func _ready():
 	if not next_level is PackedScene:
@@ -41,8 +42,9 @@ func go_to_next_level():
 	get_tree().change_scene_to_packed(next_level)	
 
 func show_level_completed():
+	level_completed_player.play()
 	level_completed.show()
-	level_completed.retry_button.grab_focus()
+	level_completed.next_level_button.grab_focus()
 	get_tree().paused = true
 
 func _on_level_completed_retry():

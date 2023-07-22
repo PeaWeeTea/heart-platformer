@@ -11,7 +11,9 @@ var was_wall_normal = Vector2.ZERO
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var starting_position = global_position
 @onready var wall_jump_timer = $WallJumpTimer
-
+@onready var jump_sound = $JumpSound
+@onready var run_sound = $RunSound
+@onready var hurt_sound = $HurtSound
 
 func _physics_process(delta):
 	var input_axis = Input.get_axis("move_left", "move_right")
@@ -50,6 +52,7 @@ func handle_wall_jump():
 		velocity.x = wall_normal.x * movement_data.speed
 		velocity.y = movement_data.jump_velocity
 		just_wall_jumped = true
+		jump_sound.play()
 
 func handle_jump():
 	if is_on_floor(): air_jump = true
@@ -58,12 +61,15 @@ func handle_jump():
 		if Input.is_action_pressed("jump"):
 			velocity.y = movement_data.jump_velocity
 			coyote_jump_timer.stop()
+			jump_sound.play()
+
 	elif not is_on_floor():
 		if Input.is_action_just_released("jump") and velocity.y < movement_data.jump_velocity / 2:
 			velocity.y = movement_data.jump_velocity / 2
 		
 		if Input.is_action_just_pressed("jump") and air_jump and not just_wall_jumped:
 			velocity.y = movement_data.jump_velocity * 0.8
+			jump_sound.play()
 			air_jump = false
 
 func handle_acceleration(input_axis, delta):
@@ -95,4 +101,5 @@ func update_animations(input_axis):
 		animated_sprite_2d.play("jump")
 
 func _on_hazard_detector_area_entered(_area):
+	hurt_sound.play()
 	global_position = starting_position
