@@ -1,6 +1,6 @@
 extends Area2D
 
-const PICKUP_SOUND = preload("res://Sound/pickupCoin.wav")
+const PICKUP_SOUND = preload("res://Assets/Sound/pickupCoin.wav")
 
 func _on_body_entered(_body):
 	self.hide()

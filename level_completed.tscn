@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cupn3d1q2nb83"]
 
 [ext_resource type="Script" path="res://level_completed.gd" id="1_8mbqj"]
-[ext_resource type="AudioStream" uid="uid://dlrop450oc027" path="res://Sound/buttonpress.wav" id="2_l6b3i"]
-[ext_resource type="AudioStream" uid="uid://bwqavf0ct7khr" path="res://Sound/buttoncycle.wav" id="3_874qk"]
+[ext_resource type="AudioStream" uid="uid://dlrop450oc027" path="res://Assets/Sound/buttonpress.wav" id="2_l6b3i"]
+[ext_resource type="AudioStream" uid="uid://bwqavf0ct7khr" path="res://Assets/Sound/buttoncycle.wav" id="3_874qk"]
 
 [node name="LevelCompleted" type="ColorRect"]
 process_mode = 3

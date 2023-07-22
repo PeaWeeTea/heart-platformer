@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba8vqnwuerrkj"]
+[gd_scene load_steps=5 format=3 uid="uid://ba8vqnwuerrkj"]
 
 [ext_resource type="Script" path="res://start_menu.gd" id="1_6hudq"]
-[ext_resource type="AudioStream" uid="uid://dlrop450oc027" path="res://Sound/buttonpress.wav" id="2_21aq1"]
-[ext_resource type="AudioStream" uid="uid://bwqavf0ct7khr" path="res://Sound/buttoncycle.wav" id="3_7vv72"]
+[ext_resource type="AudioStream" uid="uid://dlrop450oc027" path="res://Assets/Sound/buttonpress.wav" id="2_u06dx"]
+[ext_resource type="AudioStream" uid="uid://bwqavf0ct7khr" path="res://Assets/Sound/buttoncycle.wav" id="3_kdamm"]
+[ext_resource type="AudioStream" uid="uid://bu53beq3o3ngu" path="res://Assets/Music/MainMenu.wav" id="4_6rfbg"]
 
 [node name="StartMenu" type="CenterContainer"]
 anchors_preset = 15
@@ -31,13 +32,19 @@ text = "Quit"
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_21aq1")
+stream = ExtResource("2_u06dx")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="CycleSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_7vv72")
+stream = ExtResource("3_kdamm")
 bus = &"SFX"
+
+[node name="StartMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6rfbg")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

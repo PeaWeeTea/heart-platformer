@@ -2,41 +2,41 @@
 
 [ext_resource type="Script" path="res://player.gd" id="1_utewi"]
 [ext_resource type="Resource" uid="uid://b0a1fgqmvkiws" path="res://DefaultMovementData.tres" id="2_q8ufq"]
-[ext_resource type="Texture2D" uid="uid://t8aaw75sxm7" path="res://Art/player.png" id="3_fveh7"]
-[ext_resource type="AudioStream" uid="uid://cc616ny6q1d3v" path="res://Sound/jump.wav" id="4_7sldk"]
-[ext_resource type="AudioStream" uid="uid://c6yhslnilb6fe" path="res://Sound/hitHurt.wav" id="4_g6nha"]
-[ext_resource type="AudioStream" uid="uid://1ot2qjkqkn7x" path="res://Sound/footsteps.wav" id="5_h800j"]
+[ext_resource type="Texture2D" uid="uid://t8aaw75sxm7" path="res://Assets/Art/player.png" id="3_d5ur5"]
+[ext_resource type="AudioStream" uid="uid://cc616ny6q1d3v" path="res://Assets/Sound/jump.wav" id="4_l1wkv"]
+[ext_resource type="AudioStream" uid="uid://1ot2qjkqkn7x" path="res://Assets/Sound/footsteps.wav" id="5_q15qa"]
+[ext_resource type="AudioStream" uid="uid://c6yhslnilb6fe" path="res://Assets/Sound/hitHurt.wav" id="6_kslg5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_635us"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(0, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wwu5"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(144, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8qnc"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(24, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30nll"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(48, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u7avx"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(72, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibisi"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(96, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vt73t"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(120, 0, 24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0gn5v"]
-atlas = ExtResource("3_fveh7")
+atlas = ExtResource("3_d5ur5")
 region = Rect2(0, 0, 24, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d70qy"]
@@ -89,12 +89,12 @@ size = Vector2(6, 12)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r0a5s"]
 streams_count = 1
-stream_0/stream = ExtResource("4_7sldk")
+stream_0/stream = ExtResource("4_l1wkv")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8ximr"]
 streams_count = 1
-stream_0/stream = ExtResource("4_g6nha")
+stream_0/stream = ExtResource("6_kslg5")
 stream_0/weight = 1.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -143,7 +143,7 @@ volume_db = -8.0
 bus = &"SFX"
 
 [node name="RunSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_h800j")
+stream = ExtResource("5_q15qa")
 bus = &"SFX"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]

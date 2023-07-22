@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://clj4wpl8ln77q"]
+[gd_scene load_steps=12 format=3 uid="uid://clj4wpl8ln77q"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_qx5ag"]
 [ext_resource type="PackedScene" uid="uid://dx2o3h3cmbrxs" path="res://player.tscn" id="2_r6wyf"]
 [ext_resource type="PackedScene" uid="uid://cupn3d1q2nb83" path="res://level_completed.tscn" id="5_cm0bu"]
-[ext_resource type="AudioStream" uid="uid://dvc3rxtd0yfm6" path="res://Sound/countdown.wav" id="5_vtd57"]
+[ext_resource type="AudioStream" uid="uid://dvc3rxtd0yfm6" path="res://Assets/Sound/countdown.wav" id="5_r1ws2"]
+[ext_resource type="AudioStream" uid="uid://o5tft8f1mswu" path="res://Assets/Sound/startsound.wav" id="6_4qor1"]
 [ext_resource type="PackedScene" uid="uid://otqibvyokjar" path="res://level_tile_map.tscn" id="6_6o4kd"]
-[ext_resource type="AudioStream" uid="uid://o5tft8f1mswu" path="res://Sound/startsound.wav" id="6_vl171"]
-[ext_resource type="AudioStream" uid="uid://67wrdfxk3j1w" path="res://Sound/levelcomplete.wav" id="7_nyay2"]
+[ext_resource type="AudioStream" uid="uid://67wrdfxk3j1w" path="res://Assets/Sound/levelcomplete.wav" id="7_qx21c"]
+[ext_resource type="AudioStream" uid="uid://chmverva2g0t6" path="res://Assets/Music/LevelMusic.wav" id="8_uhltq"]
 
 [sub_resource type="Animation" id="Animation_3mlfn"]
 length = 0.001
@@ -173,19 +174,25 @@ libraries = {
 }
 
 [node name="CountdownPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_vtd57")
+stream = ExtResource("5_r1ws2")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="StartGamePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_vl171")
+stream = ExtResource("6_4qor1")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="LevelCompletedPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("7_nyay2")
+stream = ExtResource("7_qx21c")
 bus = &"SFX"
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_uhltq")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="next_level" from="CanvasLayer/LevelCompleted" to="." method="_on_level_completed_next_level"]
 [connection signal="retry" from="CanvasLayer/LevelCompleted" to="." method="_on_level_completed_retry"]
